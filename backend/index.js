@@ -1,6 +1,24 @@
+// import files modules >
 const express = require("express");
 const app = express();
-const port = 5000;
+const ENV_VARS = require("./config/config");
+const connectDB = require("./config/connectdb");
+const dotenv = require("dotenv");
 
-app.get("/", (req, res) => res.send("Hello World!"));
-app.listen(port, () => console.log(`Server is up on port ${port}!`));
+dotenv.config();
+
+// import files  >
+const authRoutes = require("./Routes/auth.route");
+
+app.use(express.json());
+
+const PORT = ENV_VARS.PORT;
+
+// routes
+app.use("/api/auth", authRoutes);
+
+// server is up
+app.listen(PORT, () => {
+  console.log(`Server is up on port http://localhost:${PORT}`);
+  connectDB();
+});
