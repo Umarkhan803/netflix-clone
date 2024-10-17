@@ -82,8 +82,50 @@ const signup = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {};
+// login controller
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
+    if (!email || !password) {
+      return req
+        .status(400)
+        .json({ success: false, message: "All fields are requireed" });
+    }
+
+    //  checking email is correct
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, massage: "Invalid credentials" });
+    }
+    // checking password is correct
+    const isPasswordIsCorrect = await bcryptjs.compare(password, user.password);
+
+    if (!isPasswordIsCorrect) {
+      return res
+        .status(400)
+        .json({ success: false, massage: "Invalid credentials" });
+    }
+    // generating token
+    generateToken(user._id, res);
+    res.status(200).json({
+      success: true,
+      user: {
+        ...user._doc,
+        password: " ",
+      },
+    });
+  } catch (error) {
+    console.log("error is login controller ", error);
+    res
+      .status(500)
+      .json({ success: false, massage: "Internal server error", error });
+  }
+};
+
+// logout controller
 const logout = async (req, res) => {
   try {
     res.clearCookie("jwt-netflix");
