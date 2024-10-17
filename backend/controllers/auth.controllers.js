@@ -82,11 +82,17 @@ const signup = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
-  res.send("Login route");
-};
+const login = async (req, res) => {};
 
-const logout = async (req, res) => {};
+const logout = async (req, res) => {
+  try {
+    res.clearCookie("jwt-netflix");
+    res.status(200).json({ success: true, message: "Logged out Successfully" });
+  } catch (error) {
+    console.log("Error in logout controller", error.massage);
+    res.status(500).json({ success: false, massage: "Internal server error " });
+  }
+};
 
 // exporting function
 module.exports = { signup, login, logout };
