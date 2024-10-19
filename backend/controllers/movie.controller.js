@@ -17,7 +17,8 @@ const getTrendingMovie = async (req, res) => {
     console.log(error);
   }
 };
-// ''
+
+// getting movie trailers
 const getTrailers = async (req, res) => {
   const { id } = req.params;
   try {
