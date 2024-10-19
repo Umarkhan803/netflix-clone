@@ -9,13 +9,14 @@ dotenv.config();
 
 // import files  >
 const authRoutes = require("./Routes/auth.route");
-
+const moviesRoute = require("./Routes/movie.route");
 app.use(express.json());
 
 const PORT = ENV_VARS.PORT;
 
 // routes
 app.use("/api/auth", authRoutes);
+app.use("/api/movies", moviesRoute);
 
 // server is up
 app.listen(PORT, () => {
