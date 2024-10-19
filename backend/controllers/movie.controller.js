@@ -44,7 +44,7 @@ const getDetails = async (req, res) => {
     const data = await fetchFromTmbd(
       `https://api.themoviedb.org/3/person/${id}?language=en-US`
     );
-    res.json({ success: true, details: data });
+    res.status(200).json({ success: true, details: data });
   } catch (error) {
     res
       .status(500)
@@ -58,17 +58,31 @@ const getSimilarMovies = async (req, res) => {
     const data = await fetchFromTmbd(
       `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1`
     );
-    res.json({ success: true, similar: data.results });
+    res.status(200).json({ success: true, similar: data.results });
   } catch (error) {
     res
       .status(500)
       .json({ success: false, message: "Internal server Error in similar" });
   }
 };
-
+//  getting movies category
+const getMoviesByCategory = async (req, res) => {
+  const { category } = req.params;
+  try {
+    const data = await fetchFromTmbd(
+      `https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`
+    );
+    res.status(200).json({ success: true, category: data.results });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: "Internal server Error in category" });
+  }
+};
 module.exports = {
   getTrendingMovie,
   getTrailers,
   getDetails,
   getSimilarMovies,
+  getMoviesByCategory,
 };
