@@ -14,7 +14,7 @@ const getTrendingMovie = async (req, res) => {
     res
       .status(500)
       .json({ success: false, message: "Internal server error in TMDB" });
-    console.log(error);
+    console.log(error.message);
   }
 };
 
@@ -22,18 +22,37 @@ const getTrendingMovie = async (req, res) => {
 const getTrailers = async (req, res) => {
   const { id } = req.params;
   try {
-    const data = fetchFromTmbd(
-      `https://api.themoviedb.org/3/tv/${id}/videos?language=en-US`
+    const data = await fetchFromTmbd(
+      `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`
     );
     res.json({ success: true, trailers: data.results });
+  } catch (error) {
+    if (error.message.includes("404")) {
+      return res.status(404).send(null);
+    }
+    res
+      .status(500)
+      .json({ success: false, message: "Internal server Error in trailers" });
+    console.log(error.message);
+  }
+};
+
+// getting movie details
+const getDetails = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const data = await fetchFromTmbd(
+      `https://api.themoviedb.org/3/person/${id}?language=en-US`
+    );
+    res.json({ success: true, details: data });
+    console.log(data);
   } catch (error) {
     if (error.message.include("404")) {
       return res.status(404).send(null);
     }
     res
       .status(500)
-      .json({ success: false, message: "Internal server Error in trailers" });
+      .json({ success: false, message: "Internal server Error in details" });
   }
 };
-
-module.exports = { getTrendingMovie, getTrailers };
+module.exports = { getTrendingMovie, getTrailers, getDetails };
