@@ -3,6 +3,7 @@ const {
   getTrendingMovie,
   getTrailers,
   getDetails,
+  getSimilarMovies,
 } = require("../controllers/movie.controller");
 
 const router = express.Router();
@@ -13,7 +14,10 @@ router.get("/trending", getTrendingMovie);
 // trailers route
 router.get("/:id/trailers", getTrailers);
 
-// trailers route
+// details route
 router.get("/:id/details", getDetails);
+
+// similar movies router
+router.get("/:id/similar", getSimilarMovies);
 
 module.exports = router;

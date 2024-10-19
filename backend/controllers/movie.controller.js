@@ -45,14 +45,30 @@ const getDetails = async (req, res) => {
       `https://api.themoviedb.org/3/person/${id}?language=en-US`
     );
     res.json({ success: true, details: data });
-    console.log(data);
   } catch (error) {
-    if (error.message.include("404")) {
-      return res.status(404).send(null);
-    }
     res
       .status(500)
       .json({ success: false, message: "Internal server Error in details" });
   }
 };
-module.exports = { getTrendingMovie, getTrailers, getDetails };
+// getting similar movies
+const getSimilarMovies = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const data = await fetchFromTmbd(
+      `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1`
+    );
+    res.json({ success: true, similar: data.results });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: "Internal server Error in similar" });
+  }
+};
+
+module.exports = {
+  getTrendingMovie,
+  getTrailers,
+  getDetails,
+  getSimilarMovies,
+};
