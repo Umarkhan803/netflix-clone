@@ -11,15 +11,15 @@ dotenv.config();
 const authRoutes = require("./Routes/auth.route");
 const moviesRoute = require("./Routes/movie.route");
 const tvRoute = require("./Routes/tvRoute");
-
+const protectRoute = require("./middleware/protectRoute");
 app.use(express.json());
 app.use(cookieParser());
 const PORT = ENV_VARS.PORT;
 
 // routes
 app.use("/api/auth", authRoutes);
-app.use("/api/movies", moviesRoute);
-app.use("/api/tv", tvRoute);
+app.use("/api/movies", protectRoute, moviesRoute);
+app.use("/api/tv", protectRoute, tvRoute);
 
 // server is up
 app.listen(PORT, () => {
