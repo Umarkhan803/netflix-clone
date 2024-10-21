@@ -1,10 +1,9 @@
 const express = require("express");
 const {
   searchPerson,
-  searchMovie,
-  searchTvShow,
-  searchHistory,
-  deleteSearchHistory,
+  getSearchHistory,
+  removeItemFromSearchHistory,
+  searchTv,
 } = require("../controllers/search.controller");
 
 const router = express.Router();
@@ -16,13 +15,13 @@ router.get("/person/:query", searchPerson);
 router.get("/movie/:query", searchMovie);
 
 // search tv show router
-router.get("/tv/:query", searchTvShow);
+router.get("/tv/:query", searchTv);
 
 // get search history
-router.get("/history", searchHistory);
+router.get("/history", getSearchHistory);
 
 // delete search history
-router.delete("/history/:id", deleteSearchHistory);
+router.delete("/history/:id", removeItemFromSearchHistory);
 
 // export route
 module.exports = router;
