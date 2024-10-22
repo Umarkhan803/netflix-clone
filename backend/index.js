@@ -1,6 +1,8 @@
 // import files modules >
 const express = require("express");
 const app = express();
+const cors = require("cors");
+
 const ENV_VARS = require("./config/config");
 const connectDB = require("./config/connectdb");
 const dotenv = require("dotenv");
@@ -13,8 +15,11 @@ const moviesRoute = require("./Routes/movie.route");
 const tvRoute = require("./Routes/tvRoute");
 const searchRoute = require("./Routes/search.route");
 const protectRoute = require("./middleware/protectRoute");
+
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
+
 const PORT = ENV_VARS.PORT;
 
 // routes
