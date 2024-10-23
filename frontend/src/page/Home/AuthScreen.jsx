@@ -1,12 +1,20 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
+
 const AuthScreen = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
+
+  const handelSubmit = (e) => {
+    e.preventDefault();
+    // passing the email to url
+    navigate("/signup?email=" + email);
+  };
 
   return (
     <>
-      <div className="hero-bg relative">
+      <div className="hero-bg h-screen w-full relative">
         {/* navbar */}
         <header className="max-w-6xl mx-auto flex items-center justify-between p-4 pb-10 ">
           <img src="/netflix-logo.png" alt="logo" className="w-32 md:-w-52" />
@@ -28,7 +36,9 @@ const AuthScreen = () => {
             membership.
           </p>
 
-          <form className="flex flex-col md:flex-row gap-4 w-1/2">
+          <form
+            className="flex flex-col md:flex-row gap-4 w-1/2"
+            onSubmit={handelSubmit}>
             <input
               type="email"
               placeholder="Email address"
