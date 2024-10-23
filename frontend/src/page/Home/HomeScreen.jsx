@@ -1,13 +1,11 @@
-import { useAuthStore } from "../../store/authUser";
+import Navbar from "../../components/Navbar";
 
 const HomeScreen = () => {
-  const { logout } = useAuthStore();
-
   return (
     <>
-      This is Home screen refreshdacasc
-      <img src="/netflix-logo.png" alt="logo" className="w-52" />
-      <br />
+      <div className="relative h-screen text-white bg-black">
+        <Navbar />
+      </div>
     </>
   );
 };
