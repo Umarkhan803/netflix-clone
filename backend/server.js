@@ -20,10 +20,10 @@ const PORT = ENV_VARS.PORT;
 app.use(express.json()); // will allow us to parse req.body
 app.use(cookieParser());
 
-app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/movie", protectRoute, movieRoutes);
-app.use("/api/v1/tv", protectRoute, tvRoutes);
-app.use("/api/v1/search", protectRoute, searchRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/movie", protectRoute, movieRoutes);
+app.use("/api/tv", protectRoute, tvRoutes);
+app.use("/api/search", protectRoute, searchRoutes);
 
 //server
 app.listen(PORT, () => {
