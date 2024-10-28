@@ -1,12 +1,11 @@
-const User = require("../model/user.model");
-const fetchFromTmbd = require("../services/tmbb.services");
+import { User } from "../models/user.model.js";
+import { fetchFromTMDB } from "../services/tmdb.service.js";
 
 // searching person or actor
-
-searchPerson = async (req, res) => {
+export async function searchPerson(req, res) {
   const { query } = req.params;
   try {
-    const response = await fetchFromTmbd(
+    const response = await fetchFromTMDB(
       `https://api.themoviedb.org/3/search/person?query=${query}&include_adult=false&language=en-US&page=1`
     );
 
@@ -31,14 +30,14 @@ searchPerson = async (req, res) => {
     console.log("Error in searchPerson controller: ", error.message);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
-};
+}
 
-// search by movies
-searchMovie = async (req, res) => {
+// searching movies
+export async function searchMovie(req, res) {
   const { query } = req.params;
 
   try {
-    const response = await fetchFromTmbd(
+    const response = await fetchFromTMDB(
       `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`
     );
 
@@ -62,14 +61,14 @@ searchMovie = async (req, res) => {
     console.log("Error in searchMovie controller: ", error.message);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
-};
+}
 
-// search by tv
-searchTv = async (req, res) => {
+// searching tv shows
+export async function searchTv(req, res) {
   const { query } = req.params;
 
   try {
-    const response = await fetchFromTmbd(
+    const response = await fetchFromTMDB(
       `https://api.themoviedb.org/3/search/tv?query=${query}&include_adult=false&language=en-US&page=1`
     );
 
@@ -93,19 +92,19 @@ searchTv = async (req, res) => {
     console.log("Error in searchTv controller: ", error.message);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
-};
+}
 
-// setting search history
-getSearchHistory = async (req, res) => {
+// search history
+export async function getSearchHistory(req, res) {
   try {
     res.status(200).json({ success: true, content: req.user.searchHistory });
   } catch (error) {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
-};
+}
 
 // removing items from history
-removeItemFromSearchHistory = async (req, res) => {
+export async function removeItemFromSearchHistory(req, res) {
   let { id } = req.params;
 
   id = parseInt(id);
@@ -122,17 +121,9 @@ removeItemFromSearchHistory = async (req, res) => {
       .json({ success: true, message: "Item removed from search history" });
   } catch (error) {
     console.log(
-      "Error in remove Item From Search History controller: ",
+      "Error in removeItemFromSearchHistory controller: ",
       error.message
     );
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
-};
-
-module.exports = {
-  removeItemFromSearchHistory,
-  getSearchHistory,
-  searchPerson,
-  removeItemFromSearchHistory,
-  searchTv,
-};
+}

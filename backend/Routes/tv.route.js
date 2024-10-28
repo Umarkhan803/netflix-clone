@@ -1,13 +1,14 @@
-const express = require("express");
-const {
+import express from "express";
+import {
+  getSimilarTvs,
   getTrendingTv,
   getTvDetails,
-  getSimilarTv,
+  getTvsByCategory,
   getTvTrailers,
-  getTvByCategory,
-} = require("../controllers/tv.controller");
+} from "../controllers/tv.controller.js";
 
 const router = express.Router();
+
 // trending movies route
 router.get("/trending", getTrendingTv);
 
@@ -18,9 +19,9 @@ router.get("/:id/trailers", getTvTrailers);
 router.get("/:id/details", getTvDetails);
 
 // similar movies router
-router.get("/:id/similar", getSimilarTv);
+router.get("/:id/similar", getSimilarTvs);
 
 // category  router
-router.get("/:category", getTvByCategory);
+router.get("/:category", getTvsByCategory);
 
-module.exports = router;
+export default router;
