@@ -17,8 +17,12 @@ const Slider = ({ category }) => {
   const sliderRef = useRef(null);
   useEffect(() => {
     const getContent = async () => {
-      const response = await axios.get(`/api/${contentType}/${category}`);
-      setContent(response.data.content);
+      try {
+        const response = await axios.get(`/api/${contentType}/${category}`);
+        setContent(response.data.content);
+      } catch (error) {
+        console.log(error.message);
+      }
     };
 
     getContent();
