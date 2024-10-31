@@ -7,7 +7,9 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:5000",
+        target: "https://netflix-clone-i72g.onrender.com",
+        changeOrigin: true,
+        secure: false, // disable SSL verification
       },
     },
   },

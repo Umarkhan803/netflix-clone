@@ -1,7 +1,7 @@
 // importing node packages
 import express from "express";
 import cookieParser from "cookie-parser";
-
+import path from "path";
 // importing routes
 import authRoutes from "./routes/auth.route.js";
 import movieRoutes from "./routes/movie.route.js";
@@ -16,10 +16,13 @@ import { protectRoute } from "./middleware/protectRoute.js";
 const app = express();
 
 const PORT = ENV_VARS.PORT;
+const __dirname = path.resolve();
 
 app.use(express.json()); // will allow us to parse req.body
 app.use(cookieParser());
-
+app.use("/", (req, res) => {
+  res.send("server is up !");
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/movie", protectRoute, movieRoutes);
 app.use("/api/tv", protectRoute, tvRoutes);
