@@ -2,14 +2,14 @@
   "name": "netflix-clone",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "backend/server.js",
   "scripts": {
     "dev": "NODE_ENV=development nodemon server.js",
     "start": "NODE_ENV=production node server.js",
     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
-  "author": "",
+  "author": "Mohammed Umar khan",
   "type": "module",
   "license": "ISC",
   "dependencies": {

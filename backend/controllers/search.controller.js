@@ -1,7 +1,6 @@
 import { User } from "../models/user.model.js";
 import { fetchFromTMDB } from "../services/tmdb.service.js";
 
-// searching person or actor
 export async function searchPerson(req, res) {
   const { query } = req.params;
   try {
@@ -32,7 +31,6 @@ export async function searchPerson(req, res) {
   }
 }
 
-// searching movies
 export async function searchMovie(req, res) {
   const { query } = req.params;
 
@@ -63,7 +61,6 @@ export async function searchMovie(req, res) {
   }
 }
 
-// searching tv shows
 export async function searchTv(req, res) {
   const { query } = req.params;
 
@@ -94,7 +91,6 @@ export async function searchTv(req, res) {
   }
 }
 
-// search history
 export async function getSearchHistory(req, res) {
   try {
     res.status(200).json({ success: true, content: req.user.searchHistory });
@@ -103,7 +99,6 @@ export async function getSearchHistory(req, res) {
   }
 }
 
-// removing items from history
 export async function removeItemFromSearchHistory(req, res) {
   let { id } = req.params;
 

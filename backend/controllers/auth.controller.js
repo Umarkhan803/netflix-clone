@@ -2,8 +2,7 @@ import { User } from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 import { generateTokenAndSetCookie } from "../utils/generateToken.js";
 
-// SignUp  controller
-
+// signup controller
 export async function signup(req, res) {
   try {
     const { email, password, username } = req.body; //collecting data
@@ -87,15 +86,11 @@ export async function login(req, res) {
         .json({ success: false, message: "All fields are required" });
     }
 
-    //  checking user  is already existing or not
     const user = await User.findOne({ email: email });
-
     if (!user) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Invalid credentials" });
+      return res.status(404).json({ success: false, message: "No user found" });
     }
-    // checking password is correct
+
     const isPasswordCorrect = await bcryptjs.compare(password, user.password);
 
     if (!isPasswordCorrect) {
@@ -103,7 +98,7 @@ export async function login(req, res) {
         .status(400)
         .json({ success: false, message: "Invalid credentials" });
     }
-    // generating token
+
     generateTokenAndSetCookie(user._id, res);
 
     res.status(200).json({
@@ -121,7 +116,6 @@ export async function login(req, res) {
 // logout controller
 export async function logout(req, res) {
   try {
-    //  removing cookies
     res.clearCookie("jwt-netflix");
     res.status(200).json({ success: true, message: "Logged out successfully" });
   } catch (error) {
@@ -129,7 +123,7 @@ export async function logout(req, res) {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 }
-// authorization
+
 export async function authCheck(req, res) {
   try {
     console.log("req.user:", req.user);

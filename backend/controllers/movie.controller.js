@@ -1,12 +1,10 @@
 import { fetchFromTMDB } from "../services/tmdb.service.js";
 
-// getting trending movie
 export async function getTrendingMovie(req, res) {
   try {
     const data = await fetchFromTMDB(
       "https://api.themoviedb.org/3/trending/movie/day?language=en-US"
     );
-    //getting random movies
     const randomMovie =
       data.results[Math.floor(Math.random() * data.results?.length)];
 
@@ -16,7 +14,6 @@ export async function getTrendingMovie(req, res) {
   }
 }
 
-// getting movie trailers
 export async function getMovieTrailers(req, res) {
   const { id } = req.params;
   try {
@@ -33,7 +30,6 @@ export async function getMovieTrailers(req, res) {
   }
 }
 
-// getting movie details
 export async function getMovieDetails(req, res) {
   const { id } = req.params;
   try {
@@ -49,7 +45,7 @@ export async function getMovieDetails(req, res) {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 }
-// getting similar movies
+
 export async function getSimilarMovies(req, res) {
   const { id } = req.params;
   try {
@@ -61,7 +57,7 @@ export async function getSimilarMovies(req, res) {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 }
-//  getting movies category
+
 export async function getMoviesByCategory(req, res) {
   const { category } = req.params;
   try {
