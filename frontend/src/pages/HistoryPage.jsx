@@ -68,7 +68,7 @@ const HistoryPage = () => {
       </div>
     );
   }
-  console.log(searchHistory);
+
   return (
     <>
       <div className="bg-black text-white min-h-screen">

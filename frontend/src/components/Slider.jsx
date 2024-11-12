@@ -10,11 +10,12 @@ const Slider = ({ category }) => {
   const [content, setContent] = useState([]);
   const [arrows, setArrows] = useState(false);
 
+  const sliderRef = useRef(null);
+
   const formattedCategory =
     category.replace("_", " ")[0].toUpperCase() +
     category.replaceAll("_", " ").slice(1);
   const formattedContent = contentType === "movie" ? "Movie" : "Tv Show";
-  const sliderRef = useRef(null);
   useEffect(() => {
     const getContent = async () => {
       try {
