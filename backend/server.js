@@ -22,10 +22,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/movie", protectRoute, movieRoutes);
 app.use("/api/tv", protectRoute, tvRoutes);
 app.use("/api/search", protectRoute, searchRoutes);
-connectDB();
-// app.listen(PORT, () => {
-//   console.log("Server started at http://localhost:" + PORT);
-//   connectDB();
-// });
+await connectDB();
 
 module.exports = app;
