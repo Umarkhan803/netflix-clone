@@ -38,7 +38,9 @@ const HistoryPage = () => {
   useEffect(() => {
     const getSearchHistory = async () => {
       try {
-        const response = await axios.get(`/api/search/history`);
+        const response = await axios.get(
+          `https://netflix-clone-1ym9.onrender.com/api/search/history`
+        );
         setSearchHistory(response.data.content);
       } catch (error) {
         console.log(error.message);
@@ -79,7 +81,8 @@ const HistoryPage = () => {
             {searchHistory?.map((entry) => (
               <div
                 key={entry.id}
-                className="bg-gray-800 p-4 rounded flex items-start">
+                className="bg-gray-800 p-4 rounded flex items-start"
+              >
                 <img
                   src={SMALL_IMG_BASE_URL + entry.image}
                   alt="History image"
@@ -99,7 +102,8 @@ const HistoryPage = () => {
                       : entry.searchType === "tv"
                       ? "bg-blue-600"
                       : "bg-green-600"
-                  }`}>
+                  }`}
+                >
                   {entry.searchType[0].toUpperCase() +
                     entry.searchType.slice(1)}
                 </span>

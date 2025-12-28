@@ -23,7 +23,9 @@ const SearchPage = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.get(`/api/search/${activeTab}/${searchTerm}`);
+      const res = await axios.get(
+        `https://netflix-clone-1ym9.onrender.com/api/search/${activeTab}/${searchTerm}`
+      );
       setResults(res.data.content);
     } catch (error) {
       if (error.response.status === 404) {
@@ -45,28 +47,32 @@ const SearchPage = () => {
             className={`py-2 px-4 rounded ${
               activeTab === "movie" ? "bg-red-600" : "bg-gray-800"
             } hover:bg-red-700`}
-            onClick={() => handleTabClick("movie")}>
+            onClick={() => handleTabClick("movie")}
+          >
             Movies
           </button>
           <button
             className={`py-2 px-4 rounded ${
               activeTab === "tv" ? "bg-red-600" : "bg-gray-800"
             } hover:bg-red-700`}
-            onClick={() => handleTabClick("tv")}>
+            onClick={() => handleTabClick("tv")}
+          >
             TV Shows
           </button>
           <button
             className={`py-2 px-4 rounded ${
               activeTab === "person" ? "bg-red-600" : "bg-gray-800"
             } hover:bg-red-700`}
-            onClick={() => handleTabClick("person")}>
+            onClick={() => handleTabClick("person")}
+          >
             Person
           </button>
         </div>
 
         <form
           className="flex gap-2 items-stretch mb-8 max-w-2xl mx-auto"
-          onSubmit={handleSearch}>
+          onSubmit={handleSearch}
+        >
           <input
             type="text"
             value={searchTerm}
@@ -99,7 +105,8 @@ const SearchPage = () => {
                     to={"/watch/" + result.id}
                     onClick={() => {
                       setContentType(activeTab);
-                    }}>
+                    }}
+                  >
                     <img
                       src={ORIGINAL_IMG_BASE_URL + result.poster_path}
                       alt={result.title || result.name}

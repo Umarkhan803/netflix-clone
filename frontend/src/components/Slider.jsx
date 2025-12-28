@@ -19,7 +19,9 @@ const Slider = ({ category }) => {
   useEffect(() => {
     const getContent = async () => {
       try {
-        const response = await axios.get(`/api/${contentType}/${category}`);
+        const response = await axios.get(
+          `https://netflix-clone-1ym9.onrender.com/api/${contentType}/${category}`
+        );
         setContent(response.data.content);
       } catch (error) {
         console.log(error.message);
@@ -49,19 +51,22 @@ const Slider = ({ category }) => {
       <div
         className="bg-black text-white relative px-5 md:px-20"
         onMouseEnter={() => setArrows(true)}
-        onMouseLeave={() => setArrows(false)}>
+        onMouseLeave={() => setArrows(false)}
+      >
         <h2 className="mb-4 text-2xl font-bold">
           {formattedCategory} {formattedContent}
         </h2>
 
         <div
           className="flex space-x-4 overflow-x-scroll scrollbar-hide"
-          ref={sliderRef}>
+          ref={sliderRef}
+        >
           {content.map((item) => (
             <Link
               key={item.id}
               to={`/watch/${item.id}`}
-              className="min-w-[250px] relative group">
+              className="min-w-[250px] relative group"
+            >
               <div className="rounded-lg overflow-hidden">
                 <img
                   src={SMALL_IMG_BASE_URL + item.backdrop_path}
@@ -79,14 +84,16 @@ const Slider = ({ category }) => {
               className="absolute top-1/2 -translate-y-1/2 left-5 md:left-24 flex items-center justify-center
                 size-12 rounded-full bg-black bg-opacity-50 hover:bg-opacity-75 text-white z-10
             "
-              onClick={scrollLeft}>
+              onClick={scrollLeft}
+            >
               <ChevronLeft />
             </button>
             <button
               className="absolute top-1/2 -translate-y-1/2 right-5 md:right-24 flex items-center justify-center
                 size-12 rounded-full bg-black bg-opacity-50 hover:bg-opacity-75 text-white z-10
             "
-              onClick={scrollRight}>
+              onClick={scrollRight}
+            >
               <ChevronRight />
             </button>
           </>

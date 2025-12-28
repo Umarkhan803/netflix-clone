@@ -23,7 +23,9 @@ const WatchPage = () => {
   useEffect(() => {
     const getTrailers = async () => {
       try {
-        const res = await axios.get(`/api/${contentType}/${id}/trailers`);
+        const res = await axios.get(
+          `https://netflix-clone-1ym9.onrender.com/api/${contentType}/${id}/trailers`
+        );
         setTrailers(res.data.trailers);
       } catch (error) {
         if (error.message.includes("404")) {
@@ -38,7 +40,9 @@ const WatchPage = () => {
   useEffect(() => {
     const getSimilarContent = async () => {
       try {
-        const res = await axios.get(`/api/${contentType}/${id}/similar`);
+        const res = await axios.get(
+          `https://netflix-clone-1ym9.onrender.com/api/${contentType}/${id}/similar`
+        );
         setSimilarContent(res.data.similar);
       } catch (error) {
         if (error.message.includes("404")) {
@@ -53,7 +57,9 @@ const WatchPage = () => {
   useEffect(() => {
     const getContentDetails = async () => {
       try {
-        const res = await axios.get(`/api/${contentType}/${id}/details`);
+        const res = await axios.get(
+          `https://netflix-clone-1ym9.onrender.com/api/${contentType}/${id}/details`
+        );
         setContent(res.data.content);
       } catch (error) {
         if (error.message.includes("404")) {
@@ -126,7 +132,8 @@ const WatchPage = () => {
               }}
 							`}
               disabled={currentTrailerIdx === 0}
-              onClick={handlePrev}>
+              onClick={handlePrev}
+            >
               <ChevronLeft size={24} />
             </button>
 
@@ -139,7 +146,8 @@ const WatchPage = () => {
               }}
 							`}
               disabled={currentTrailerIdx === trailers.length - 1}
-              onClick={handleNext}>
+              onClick={handleNext}
+            >
               <ChevronRight size={24} />
             </button>
           </div>
@@ -170,7 +178,8 @@ const WatchPage = () => {
         {/* movie details */}
         <div
           className="flex flex-col md:flex-row items-center justify-between gap-20 
-				max-w-6xl mx-auto">
+				max-w-6xl mx-auto"
+        >
           <div className="mb-4 md:mb-0">
             <h2 className="text-5xl font-bold text-balance">
               {content?.title || content?.name}
@@ -202,14 +211,16 @@ const WatchPage = () => {
 
             <div
               className="flex overflow-x-scroll scrollbar-hide gap-4 pb-4 group"
-              ref={sliderRef}>
+              ref={sliderRef}
+            >
               {similarContent.map((content) => {
                 if (content.poster_path === null) return null;
                 return (
                   <Link
                     key={content.id}
                     to={`/watch/${content.id}`}
-                    className="w-52 flex-none">
+                    className="w-52 flex-none"
+                  >
                     <img
                       src={SMALL_IMG_BASE_URL + content.poster_path}
                       alt="Poster path"

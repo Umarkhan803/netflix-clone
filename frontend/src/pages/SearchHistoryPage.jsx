@@ -39,7 +39,9 @@ const SearchHistoryPage = () => {
   useEffect(() => {
     const getSearchHistory = async () => {
       try {
-        const res = await axios.get(`/api/search/history`);
+        const res = await axios.get(
+          `https://netflix-clone-1ym9.onrender.com/api/search/history`
+        );
         setSearchHistory(res.data.content);
       } catch (error) {
         setSearchHistory([]);
@@ -50,7 +52,9 @@ const SearchHistoryPage = () => {
 
   const handleDelete = async (entry) => {
     try {
-      await axios.delete(`/api/search/history/${entry.id}`);
+      await axios.delete(
+        `https://netflix-clone-1ym9.onrender.com/api/search/history/${entry.id}`
+      );
       setSearchHistory(searchHistory.filter((item) => item.id !== entry.id));
     } catch (error) {
       toast.error("Failed to delete search item");
@@ -81,7 +85,8 @@ const SearchHistoryPage = () => {
           {searchHistory?.map((entry) => (
             <div
               key={entry.id}
-              className="bg-gray-800 p-4 rounded flex items-start">
+              className="bg-gray-800 p-4 rounded flex items-start"
+            >
               <img
                 src={SMALL_IMG_BASE_URL + entry.image}
                 alt="History image"
@@ -101,7 +106,8 @@ const SearchHistoryPage = () => {
                     : entry.searchType === "tv"
                     ? "bg-blue-600"
                     : "bg-green-600"
-                }`}>
+                }`}
+              >
                 {entry.searchType[0].toUpperCase() + entry.searchType.slice(1)}
               </span>
               <Trash
