@@ -7,12 +7,13 @@ import searchRoutes from "./routes/search.route.js";
 import { ENV_VARS } from "./config/envVars.js";
 import { connectDB } from "./config/db.js";
 import { protectRoute } from "./middleware/protectRoute.js";
-
+import cors from "cors";
 const app = express();
 
 const PORT = ENV_VARS.PORT;
 
 app.use(express.json());
+app.use(cors());
 app.use(cookieParser());
 
 app.get("/", (req, res) => res.send("server is up"));
