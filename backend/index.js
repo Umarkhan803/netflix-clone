@@ -24,4 +24,9 @@ app.use("/api/tv", protectRoute, tvRoutes);
 app.use("/api/search", protectRoute, searchRoutes);
 await connectDB();
 
-module.exports = app;
+// Start server
+app.listen(PORT, () => {
+  console.log("Server started on port " + PORT);
+});
+
+export default app;

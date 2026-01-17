@@ -4,9 +4,9 @@
   "description": "",
   "main": "backend/server.js",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon backend/server.js",
-    "start": "node server.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+    "dev": "NODE_ENV=development nodemon index.js",
+    "start": "node index.js",
+    "build": "npm install"
   },
   "keywords": [],
   "author": "Mohammed Umar khan",
