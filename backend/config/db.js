@@ -4,7 +4,7 @@ import { ENV_VARS } from "./envVars.js";
 export const connectDB = async () => {
   try {
     const conn = await mongoose.connect(
-      process.env.MONGO_URI || ENV_VARS.MONGO_URI
+      process.env.MONGODB_URI || ENV_VARS.MONGODB_URI
     );
     console.log("MongoDB connected: " + conn.connection.host);
   } catch (error) {
