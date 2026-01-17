@@ -13,7 +13,13 @@ const app = express();
 const PORT = ENV_VARS.PORT;
 
 app.use(express.json());
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 
 app.get("/", (req, res) => res.send("server is up"));
@@ -25,8 +31,5 @@ app.use("/api/search", protectRoute, searchRoutes);
 await connectDB();
 
 // Start server
-app.listen(PORT, () => {
-  console.log("Server started on port " + PORT);
-});
 
 export default app;
